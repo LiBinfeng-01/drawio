@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draw.io with Frames Plugin (Auto-open)</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
+	<link rel="stylesheet" media="(forced-colors: active)" href="styles/high-contrast.css" id="high-contrast-stylesheet">
+    <script src="js/bootstrap.js"></script>
+    <style type="text/css">
+		.geBlock {
+			z-index:-3;
+			margin:100px;
+			margin-top:40px;
+			margin-bottom:30px;
+			padding:20px;
+			text-align:center;
+			min-width:50%;
+		}
+		.geBlock h1, .geBlock h2 {
+			margin-top:0px;
+			padding-top:0px;
+		}
+	</style>
+</head>
+<body class="geEditor geClassic">
+<div id="geInfo">
+	<div class="geBlock">
+		<h1>Draw.io with Frames Plugin</h1>
+		<p>Loading with Frames plugin (will auto-open)...</p>
+		<h2 id="geStatus">Loading... <img src="images/spin.gif"/></h2>
+		<p>
+			Please ensure JavaScript is enabled.
+		</p>
+	</div>
+</div>
+<!-- Load Frames plugin before main.js -->
+<script src="plugins/frames.js"></script>
+<script src="js/main.js"></script>
+<!-- Auto-open Frames window after page loads -->
+<script>
+	// Wait for page to fully load
+	window.addEventListener('load', function() {
+		setTimeout(function() {
+			if (typeof editorUi !== 'undefined' && editorUi.actions) {
+				var framesAction = editorUi.actions.get('frames...');
+				if (framesAction) {
+					console.log('Auto-opening Frames window...');
+					framesAction.funct();
+				} else {
+					console.error('Frames action not found');
+				}
+			} else {
+				console.log('Waiting for editorUi...');
+				setTimeout(arguments.callee, 1000);
+			}
+		}, 2000);
+	});
+</script>
+</body>
+</html>
+
